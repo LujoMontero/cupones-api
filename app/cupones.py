@@ -2,7 +2,7 @@ def aplicar_cupon(precio, cupon):
     descuentos = {
         "OFERTA10": 0.10,
         "SUPER20": 0.20,
-        "BIENVENIDA": 0.15
+        
     }
     if cupon in descuentos:
         return round(precio * (1 - descuentos[cupon]), 2)

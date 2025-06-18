@@ -109,7 +109,7 @@ Falla en Git Action
 Test aprobados
 ![Captura de pantalla 2025-06-17 220725](https://github.com/user-attachments/assets/eaefe86e-02bf-4e8f-893d-2252a022405f)
 
-
+![Captura de pantalla 2025-06-17 221219](https://github.com/user-attachments/assets/a86219ce-f1b7-4acb-8cd7-3d928af05853)
 
 ---
 

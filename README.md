@@ -98,11 +98,18 @@ Puedes ver los resultados en la pestaña [Actions](https://github.com/LujoMonter
 ---
 
 ## 📸 Evidencias requeridas
+Falla en consola
 
-- ✅ Captura del test fallando tras la regresión.
-- ✅ Captura del test en verde tras corregir el error.
-- ✅ Captura del workflow ejecutado en GitHub Actions.
-- 🎥 Video resumen (2-3 min) explicando cómo se detectó y solucionó el error.
+![Captura de pantalla 2025-06-17 220406](https://github.com/user-attachments/assets/ef43e8d0-b030-46a3-8a47-00b98535835a)
+
+Falla en Git Action
+
+![Captura de pantalla 2025-06-17 220617](https://github.com/user-attachments/assets/8e43f45e-6ca7-49d9-8bda-642289c36bca)
+
+Test aprobados
+![Captura de pantalla 2025-06-17 220725](https://github.com/user-attachments/assets/eaefe86e-02bf-4e8f-893d-2252a022405f)
+
+
 
 ---
 

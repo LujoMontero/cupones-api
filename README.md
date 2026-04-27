@@ -1,75 +1,82 @@
-# 🧾 Cupones API – Pruebas de Regresión Automatizadas
+<div align="center">
 
-Autor: **Luis Montero**  
-Repositorio: [github.com/LujoMontero/cupones-api](https://github.com/LujoMontero/cupones-api)
+# 🧾 Cupones API
 
-Este proyecto es una API construida con **Python + Flask** que permite aplicar cupones de descuento y calcular precios finales con impuestos. Fue desarrollado como parte de un **ejercicio guiado de automatización de pruebas**, aplicando pruebas de regresión e integración continua (CI) con **GitHub Actions**.
+### Pruebas de Regresión Automatizadas · Flask · Pytest · GitHub Actions
 
----
+![Python](https://img.shields.io/badge/Python_3.10-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
-## 🚀 Objetivos del proyecto
+[![Tests](https://github.com/LujoMontero/cupones-api/actions/workflows/test-regresion.yml/badge.svg)](https://github.com/LujoMontero/cupones-api/actions)
 
-- Construir una API REST básica.
-- Aplicar cupones de descuento a precios base.
-- Implementar pruebas unitarias y de regresión.
-- Simular y detectar errores de regresión.
-- Automatizar pruebas con GitHub Actions.
+</div>
 
 ---
 
-## 📁 Estructura del proyecto
+## 📌 ¿Qué hace este proyecto?
+
+API REST que aplica cupones de descuento y calcula precios finales con impuestos. El enfoque del proyecto es demostrar **pruebas de regresión**: cómo detectar automáticamente cuando un cambio rompe funcionalidades existentes, usando un pipeline CI/CD con GitHub Actions.
+
+---
+
+## 🏗️ Estructura del proyecto
 
 ```
 cupones-api/
 ├── app/
 │   ├── __init__.py
-│   ├── cupones.py         # Lógica de negocio
-│   └── api.py             # API Flask
+│   ├── cupones.py     # Lógica de negocio: descuentos e impuestos
+│   └── api.py         # Endpoints Flask
 ├── tests/
-│   ├── test_cupones.py    # Pruebas unitarias
-│   └── test_api.py        # (Opcional) Pruebas HTTP
-├── requirements.txt
-├── .github/
-│   └── workflows/
-│       └── test-regresion.yml
+│   ├── test_cupones.py  # Pruebas unitarias de la lógica
+│   └── test_api.py      # Pruebas de integración HTTP
+├── .github/workflows/
+│   └── test-regresion.yml
+└── requirements.txt
 ```
 
 ---
 
-## ⚙ Instalación
-
-1. Clona este repositorio:
+## 🚀 Instalación
 
 ```bash
+# 1. Clonar el repositorio
 git clone https://github.com/LujoMontero/cupones-api.git
 cd cupones-api
-```
 
-2. Crea y activa un entorno virtual:
-
-```bash
+# 2. Crear entorno virtual
 python -m venv venv
-venv\Scripts\activate     # Windows
-# source venv/bin/activate  # Linux/Mac
-```
+source venv/bin/activate    # Linux/Mac
+venv\Scripts\activate       # Windows
 
-3. Instala dependencias:
-
-```bash
+# 3. Instalar dependencias
 pip install -r requirements.txt
-```
 
-4. Ejecuta el servidor:
-
-```bash
+# 4. Levantar la API
 python app/api.py
 ```
 
 ---
 
-## 🧪 Ejecutar pruebas
+## 🎟️ Cupones disponibles
 
-Para correr las pruebas unitarias y de regresión:
+| Cupón | Descuento |
+|---|---|
+| `BIENVENIDA` | 10% |
+| `VERANO` | 20% |
+| `VIP` | 30% |
+
+**Cálculo aplicado:**
+
+```
+Precio final = (Precio base × (1 - descuento)) × (1 + IVA)
+```
+
+---
+
+## ✅ Ejecutar pruebas
 
 ```bash
 pytest
@@ -77,59 +84,61 @@ pytest
 
 ---
 
-## 💥 Simular una regresión
+## 🧪 Pruebas de regresión
 
-1. En `app/cupones.py`, elimina accidentalmente un cupón (por ejemplo `"BIENVENIDA"`).
-2. Ejecuta `pytest` y notarás que falla `test_descuento_bienvenida`.
-3. Corrige el error restaurando el cupón y vuelve a ejecutar `pytest`.
+El proyecto simula el ciclo real de detección y corrección de regresiones:
 
----
+**Paso 1 — Pruebas en verde ✅**
+```bash
+pytest  # Todos los tests pasan
+```
 
-## 🤖 Automatización con GitHub Actions
+**Paso 2 — Simular regresión 🔴**
+```python
+# En app/cupones.py, eliminar el cupón "BIENVENIDA"
+CUPONES = {"VERANO": 0.20, "VIP": 0.30}  # BIENVENIDA eliminado
+```
 
-El archivo `.github/workflows/test-regresion.yml` contiene un workflow que:
+**Paso 3 — Detectar fallo automático 🚨**
+```bash
+pytest  # test_descuento_bienvenida FALLA → regresión detectada
+```
 
-- Se ejecuta con cada `push` o `pull request` a `main`.
-- Instala dependencias.
-- Corre las pruebas con `pytest`.
-
-Puedes ver los resultados en la pestaña [Actions](https://github.com/LujoMontero/cupones-api/actions).
-
----
-
-## 📸 Evidencias requeridas
-Falla en consola
-
-![Captura de pantalla 2025-06-17 220406](https://github.com/user-attachments/assets/ef43e8d0-b030-46a3-8a47-00b98535835a)
-
-Falla en Git Action
-
-![Captura de pantalla 2025-06-17 220617](https://github.com/user-attachments/assets/8e43f45e-6ca7-49d9-8bda-642289c36bca)
-
-Test aprobados
-![Captura de pantalla 2025-06-17 220725](https://github.com/user-attachments/assets/eaefe86e-02bf-4e8f-893d-2252a022405f)
-
-![Captura de pantalla 2025-06-17 221219](https://github.com/user-attachments/assets/a86219ce-f1b7-4acb-8cd7-3d928af05853)
+**Paso 4 — Corregir y volver a verde ✅**
+```python
+CUPONES = {"BIENVENIDA": 0.10, "VERANO": 0.20, "VIP": 0.30}
+```
 
 ---
 
-## 🧠 Lecciones aprendidas
+## 🔁 Pipeline CI/CD
 
-- Las pruebas de regresión permiten detectar fallos que afectan funcionalidades previas.
-- Automatizar las pruebas garantiza calidad continua en un entorno ágil.
-- Integrar pruebas en CI/CD mejora la confianza del equipo y acelera la entrega.
+Se ejecuta automáticamente en cada `push` o `pull_request` a `main`:
+
+```yaml
+on: [push, pull_request]
+jobs:
+  regresion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: pip install -r requirements.txt
+      - run: pytest
+```
+
+👉 [Ver resultados en Actions](https://github.com/LujoMontero/cupones-api/actions)
 
 ---
 
-## 🛠 Tecnologías utilizadas
+## 💡 Conceptos aplicados
 
-- Python 3.10
-- Flask
-- Pytest
-- GitHub Actions
+- **Pruebas de regresión**: Verificar que cambios nuevos no rompan funcionalidades existentes
+- **Integración continua**: Ejecución automática de pruebas en cada commit
+- **Flask Test Client**: Pruebas de integración sin necesidad de levantar servidor real
+- **Pytest**: Suite de testing moderna con fixtures y reportes claros
 
 ---
 
-## 📄 Licencia
+## 👨‍💻 Autor
 
-MIT License © 2025 Luis Montero
+**Luis Montero** · [GitHub](https://github.com/LujoMontero) · [LinkedIn](https://www.linkedin.com/in/luis-montero-if/)
